@@ -1,5 +1,4 @@
 import random
-import time
 import copy
 
 def CreateRandomList(size):
@@ -22,36 +21,46 @@ def ShakerSort(A):
             if A[i] > A[i+1]:
                 A[i], A[i+1] = A[i+1], A[i]
                 sorted = False
+
         for i in range(len(A) - 1, 0, -1):
             if A[i] < A[i-1]:
                 A[i], A[i-1] = A[i-1], A[i]
                 sorted = False
 
 def CountingSort(A):
-    pass
+    freq = [0] * (max(A) + 1)
+    for num in A:
+        freq[num] += 1
+
+    k = 0
+    for i in range(len(freq)):
+        val = i
+        count = freq[i]
+        for j in range(count):
+            A[k] = val
+            k += 1
 
 def main():
-    a = CreateRandomList(100)
+    a = CreateRandomList(1000)
     b = copy.deepcopy(a)
     b.sort()
+
     c = copy.deepcopy(a)
     d = copy.deepcopy(a)
     d.sort()
 
-    start = time.time()
+    e = copy.deepcopy(a)
+    f = copy.deepcopy(a)
+    f.sort()
+
     BubbleSort(a)
-    end = time.time()
-    elapsedBubble = end - start
     print(a == b)
 
-    start = time.time()
     ShakerSort(c)
-    end = time.time()
-    elapsedShaker = end - start
     print(c == d)
 
-    print(f"Bubble Sort: {(elapsedBubble*1000):.4f} ms")
-    print(f"Shaker Sort: {(elapsedShaker*1000):.4f} ms")
+    CountingSort(e)
+    print(e == f)
 
 if __name__ == "__main__":
     main()
