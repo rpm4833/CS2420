@@ -43,24 +43,18 @@ def CountingSort(A):
 def main():
     a = CreateRandomList(1000)
     b = copy.deepcopy(a)
-    b.sort()
-
+    a.sort()
     c = copy.deepcopy(a)
     d = copy.deepcopy(a)
-    d.sort()
 
-    e = copy.deepcopy(a)
-    f = copy.deepcopy(a)
-    f.sort()
-
-    BubbleSort(a)
-    print(a == b)
+    BubbleSort(b)
+    print(b == a)
 
     ShakerSort(c)
-    print(c == d)
+    print(c == a)
 
-    CountingSort(e)
-    print(e == f)
+    CountingSort(d)
+    print(d == a)
 
 if __name__ == "__main__":
     main()
