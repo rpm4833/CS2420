@@ -41,11 +41,11 @@ def CountingSort(A):
             k += 1
 
 def main():
-    a = CreateRandomList(1000)
+    a = CreateRandomList(10)
     b = copy.deepcopy(a)
-    a.sort()
     c = copy.deepcopy(a)
     d = copy.deepcopy(a)
+    a.sort()
 
     BubbleSort(b)
     print(b == a)
