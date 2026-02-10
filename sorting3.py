@@ -19,7 +19,6 @@ def BubbleSort(A, work):
             work[0] += 1
             if A[i] > A[i+1]:
                 A[i], A[i+1] = A[i+1], A[i]
-                work[0] += 1
                 sorted = False
 
 def ShakerSort(A, work):
@@ -31,7 +30,6 @@ def ShakerSort(A, work):
             work[0] += 1
             if A[i] > A[i+1]:
                 A[i], A[i+1] = A[i+1], A[i]
-                work[0] += 1
                 sorted = False
 
         # Sort backward
@@ -39,16 +37,13 @@ def ShakerSort(A, work):
             work[0] += 1
             if A[i] < A[i-1]:
                 A[i], A[i-1] = A[i-1], A[i]
-                work[0] += 1
                 sorted = False
 
 def CountingSort(A, work):
     # Make frequency list
     freq = [0] * (max(A) + 1)
-    work[0] += len(freq)
     for num in A:
         freq[num] += 1
-        work[0] += 1
 
     # Copy to frequency list
     k = 0
@@ -78,12 +73,10 @@ def QuickSortR(A, low, high, mod, work):
         if A[i] <= A[low]:
             A[i], A[lmgt] = A[lmgt], A[i]
             lmgt += 1     
-            work[0] += 1
 
     #Recurse
     pivot_index = lmgt - 1
     A[low], A[pivot_index] = A[pivot_index], A[low]
-    work[0] += 1
     QuickSortR(A, low, pivot_index - 1, mod, work)
     QuickSortR(A, pivot_index + 1, high, mod, work)
 
@@ -104,7 +97,6 @@ def MergeSort(A, work):
     mid = len(A) // 2
     l = A[:mid]
     r = A[mid:]
-    work[0] += len(A)
 
     #Recurse
     MergeSort(l, work)
