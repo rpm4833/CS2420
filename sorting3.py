@@ -2,7 +2,6 @@ import random
 import math
 import sys
 
-
 def CreateRandomList(size):
     return [random.randrange(0, size - 1) for i in range(size)]
 
