@@ -1,9 +1,9 @@
-from bag_linked_list import Bag
+from bag_linked_list import Bag as LinkedListBag
 from student import Student
 from time import time
 
 def main():
-    bag = Bag()
+    bag = LinkedListBag()
 
     # Insertion
     start = time()
@@ -18,8 +18,7 @@ def main():
 
     # Iteration
     start = time()
-    ages = 0
-    total = 0
+    ages = total = 0
     for item in bag:
         ages += int(item.age)
         total += 1
@@ -38,8 +37,7 @@ def main():
     
     # Retrieval
     start = time()
-    ages = 0
-    total = 0
+    ages = total = 0
     with open('RetrieveNames.txt', 'r') as file:
         for line in file:
             temp = Student("", "", line.strip(), "", "")
