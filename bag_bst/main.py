@@ -2,19 +2,19 @@ from bag_binary_search import Bag as BSTBag
 from student import Student
 from time import time
 
-def main():
+def main(size):
     bag = BSTBag()
 
     # Insertion
     start = time()
-    with open('FakeNames.txt', 'r') as file:
+    with open(f'FakeNames{size}.txt', 'r') as file:
         for line in file:
             values = line.split()
             student = Student(values[0], values[1], values[2], values[3], values[4])
             if not bag.insert(student):
                 print(f"{student.first} {student.last} could not be added!")
     end = time()
-    print(f"Insertion took {(end - start):.2f} seconds. Total students: {bag.size()}")
+    print(f"Insertion took {(end - start):.4f} seconds. Total students: {bag.size()}")
 
     # Iteration
     start = time()
@@ -25,20 +25,21 @@ def main():
     end = time()
     print(f"Iteration took {(end - start):.4f} seconds. Average age of all students: {(ages / total):.4f}")
 
+ 
     # Deletion
     start = time()
-    with open('DeleteNames.txt', 'r') as file:
+    with open(f'DeleteNames{size}.txt', 'r') as file:
         for line in file:
             temp = Student("", "", line.strip(), "", "")
             if not bag.delete(temp):
                 print(f"Student with SSN {temp.ssn} not found!")
     end = time()
-    print(f"Deletion took {(end - start):.2f} seconds. Total students: {bag.size()}")
-    
+    print(f"Deletion took {(end - start):.4f} seconds. Total students: {bag.size()}")
+
     # Retrieval
     start = time()
     ages = total = 0
-    with open('RetrieveNames.txt', 'r') as file:
+    with open(f'RetrieveNames{size}.txt', 'r') as file:
         for line in file:
             temp = Student("", "", line.strip(), "", "")
             rtemp = bag.retrieve(temp)
@@ -48,8 +49,9 @@ def main():
             else:
                 print(f"Student with SSN {temp.ssn} not found!")
     end = time()
-    print(f"Retrieval took {(end - start):.2f} seconds. Average age of retrieved students: {(ages / total):.4f}.")
+    print(f"Retrieval took {(end - start):.4f} seconds. Average age of retrieved students: {(ages / total):.4f}.")
     
 
 if __name__ == "__main__":
-    main()
+    main("")
+    main("Medium")

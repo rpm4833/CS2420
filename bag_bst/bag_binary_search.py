@@ -13,28 +13,54 @@ class Bag:
         if self.exists(item):
             return False
         
-        n = Node(item)
-        self.root = self.insertR(n, self.root)
+        new = Node(item)
+        self.root = self.insertR(new, self.root)
         return True
-    
-    def insertR(self, n, current):
+
+    def insertR(self, new, current):
         if current is None:
-            current = n
-        elif n.item < current.item:
-            current.l = self.insertR(n, current.l)
+            current = new
+        elif new.item < current.item:
+            current.l = self.insertR(new, current.l)
         else:
-            current.r = self.insertR(n, current.r)
+            current.r = self.insertR(new, current.r)
         return current
     
     def delete(self, item):
-        pass
+        if not self.exists(item):
+            return False
+        
+        self.root = self.deleteR(item, self.root)
+        return True
+    
+    def deleteR(self, item, current):
+        if item == current.item:
+            if not current.l and not current.r:     # leaf node
+                current = None
+            elif not current.l:                     # right-child node
+                current = current.r
+            elif not current.r:                     # left-child node
+                current = current.l
+            else:                                   # two-child node
+                predecessor = current.l
+                while predecessor.r:
+                    predecessor = predecessor.r
+                current.item = predecessor.item
+                current.l = self.deleteR(predecessor.item, current.l)
+
+        elif item < current.item:
+            current.l = self.deleteR(item, current.l)
+        else:
+            current.r = self.deleteR(item, current.r)
+
+        return current
 
     def retrieve(self, item):
         return self.retrieveR(item, self.root)
 
     def retrieveR(self, item, current):
         if current is None:
-            return False
+            return None
         elif item == current.item:
             return current.item
         elif item < current.item:
@@ -71,4 +97,3 @@ class Bag:
             yield from self.iterR(current.l)
             yield current.item
             yield from self.iterR(current.r)
-
