@@ -42,30 +42,43 @@ class Bag:
     def retrieve(self, item):
         key = hash(item)
         index = key % self.capacity()
+        start_index = index
         while True:
-            if self.table[index] == None:
+            if self.table[index] is None:
                 return None
             if self.table[index] and self.table[index] == item:
                 return self.table[index]
             
             index = (index + 1) % self.capacity()
+
+            if index == start_index:
+                return None
     
     def exists(self, item):
         key = hash(item)
         index = key % self.capacity()
+        start_index = index
         while True:
-            if not self.table[index] == None:
+            if self.table[index] is None:
                 return False
             if self.table[index] and self.table[index] == item:
                 return True
             
             index = (index + 1) % self.capacity()
+            
+            if index == start_index:
+                return None
 
     def resize(self):
-        self.table.extend([None], self.capacity() + 1)
-        while not self.is_prime(self.capacity()):
-            self.table.extend([None], 2)
-        return True
+        new_table = self.capacity() * 2 + 1
+        while not self.is_prime(new_table):
+            new_table += 2
+        old_table = self.table
+        self.table = [None] * new_table
+        self.table_size = 0
+        for item in old_table:
+            if item:
+                self.insert(item)
 
     def size(self):
         return self.table_size
