@@ -1,0 +1,11 @@
+n.next = self.tail.next
+self.tail.next = n
+self.tail = n
+
+
+Linked List != delete
+BST != insert, delete, __iter__
+
+B-Tree with 100 item and 101 child nodes
+At 2-deep, holds 102 * 100 = 10,200
+
