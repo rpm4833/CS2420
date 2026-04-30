@@ -1,5 +1,4 @@
 # Types of items inserted must have overloaded comparison operators and __hash__
-from math import sqrt
 class Bag:
     def __init__(self):
         self.table_size = 0
@@ -100,7 +99,7 @@ class Bag:
         if num % 2 == 0:
             return False
         
-        for i in range(3, int(sqrt(num)) + 1, 2):
+        for i in range(3, int(num**0.5) + 1, 2):
             if num % i == 0:
                 return False
 
