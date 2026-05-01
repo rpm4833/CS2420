@@ -42,6 +42,5 @@ class Graph:
 
         return None
     
-
     def visualize(self):
         return self.neighbors
